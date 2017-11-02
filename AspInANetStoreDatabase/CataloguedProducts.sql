@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[CataloguedProducts]
 (
-	[Id] INT NOT NULL PRIMARY KEY,
+	[Id] INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[CatalogueId] INT Not Null,
 	[ProductId] INT Not Null,
 	CONSTRAINT FK_CataloguedProducts_Catalogue_Id FOREIGN KEY (CatalogueId) References [dbo].[Catalogue] (Id),
