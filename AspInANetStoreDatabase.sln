@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "AspInANetStoreDatabase", "AspInANetStoreDatabase\AspInANetStoreDatabase.sqlproj", "{B47E2E27-1980-46A3-8F17-F52FE9D46563}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspInANetStoreFrontEnd", "AspInANetStoreFrontEnd\AspInANetStoreFrontEnd.csproj", "{0C1E18CA-2AA1-4F44-936A-8B23B58BBE46}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B47E2E27-1980-46A3-8F17-F52FE9D46563} = {B47E2E27-1980-46A3-8F17-F52FE9D46563}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
