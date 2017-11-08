@@ -157,44 +157,48 @@
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductOrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\StaffsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AspInANetStoreDatabaseModel.Context.cs">
+    <Compile Include="Models\AspInANetStoreModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AspInANetStoreDatabaseModel.Context.tt</DependentUpon>
+      <DependentUpon>AspInANetStoreModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AspInANetStoreDatabaseModel.cs">
+    <Compile Include="Models\AspInANetStoreModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AspInANetStoreDatabaseModel.tt</DependentUpon>
+      <DependentUpon>AspInANetStoreModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AspInANetStoreDatabaseModel.Designer.cs">
+    <Compile Include="Models\AspInANetStoreModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AspInANetStoreDatabaseModel.edmx</DependentUpon>
+      <DependentUpon>AspInANetStoreModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Catalogue.cs">
-      <DependentUpon>AspInANetStoreDatabaseModel.tt</DependentUpon>
+      <DependentUpon>AspInANetStoreModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CataloguedProduct.cs">
-      <DependentUpon>AspInANetStoreDatabaseModel.tt</DependentUpon>
+      <DependentUpon>AspInANetStoreModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer.cs">
-      <DependentUpon>AspInANetStoreDatabaseModel.tt</DependentUpon>
+      <DependentUpon>AspInANetStoreModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\C__RefactorLog.cs">
-      <DependentUpon>AspInANetStoreDatabaseModel.tt</DependentUpon>
+      <DependentUpon>AspInANetStoreModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Order.cs">
-      <DependentUpon>AspInANetStoreDatabaseModel.tt</DependentUpon>
+      <DependentUpon>AspInANetStoreModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.cs">
-      <DependentUpon>AspInANetStoreDatabaseModel.tt</DependentUpon>
+      <DependentUpon>AspInANetStoreModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductOrder.cs">
-      <DependentUpon>AspInANetStoreDatabaseModel.tt</DependentUpon>
+      <DependentUpon>AspInANetStoreModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Staff.cs">
+      <DependentUpon>AspInANetStoreModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -205,27 +209,27 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\AspInANetStoreDatabaseModel.Context.tt">
+    <Content Include="Models\AspInANetStoreModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>AspInANetStoreDatabaseModel.Context.cs</LastGenOutput>
-      <DependentUpon>AspInANetStoreDatabaseModel.edmx</DependentUpon>
+      <DependentUpon>AspInANetStoreModel.edmx</DependentUpon>
+      <LastGenOutput>AspInANetStoreModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\AspInANetStoreDatabaseModel.tt">
+    <Content Include="Models\AspInANetStoreModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AspInANetStoreDatabaseModel.edmx</DependentUpon>
-      <LastGenOutput>AspInANetStoreDatabaseModel.cs</LastGenOutput>
+      <DependentUpon>AspInANetStoreModel.edmx</DependentUpon>
+      <LastGenOutput>AspInANetStoreModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\AspInANetStoreDatabaseModel.edmx">
+    <EntityDeploy Include="Models\AspInANetStoreModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>AspInANetStoreDatabaseModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>AspInANetStoreModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\AspInANetStoreDatabaseModel.edmx.diagram">
-      <DependentUpon>AspInANetStoreDatabaseModel.edmx</DependentUpon>
+    <Content Include="Models\AspInANetStoreModel.edmx.diagram">
+      <DependentUpon>AspInANetStoreModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -253,16 +257,23 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Customers\Create.cshtml" />
-    <Content Include="Views\Customers\Delete.cshtml" />
-    <Content Include="Views\Customers\Details.cshtml" />
-    <Content Include="Views\Customers\Edit.cshtml" />
-    <Content Include="Views\Customers\Index.cshtml" />
+    <Content Include="Views\Shared\_HeaderNavBar.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Catalogues\Create.cshtml" />
     <Content Include="Views\Catalogues\Delete.cshtml" />
     <Content Include="Views\Catalogues\Details.cshtml" />
     <Content Include="Views\Catalogues\Edit.cshtml" />
     <Content Include="Views\Catalogues\Index.cshtml" />
+    <Content Include="Views\CataloguedProducts\Create.cshtml" />
+    <Content Include="Views\CataloguedProducts\Delete.cshtml" />
+    <Content Include="Views\CataloguedProducts\Details.cshtml" />
+    <Content Include="Views\CataloguedProducts\Edit.cshtml" />
+    <Content Include="Views\CataloguedProducts\Index.cshtml" />
+    <Content Include="Views\Customers\Create.cshtml" />
+    <Content Include="Views\Customers\Delete.cshtml" />
+    <Content Include="Views\Customers\Details.cshtml" />
+    <Content Include="Views\Customers\Edit.cshtml" />
+    <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Orders\Create.cshtml" />
     <Content Include="Views\Orders\Delete.cshtml" />
     <Content Include="Views\Orders\Details.cshtml" />
@@ -278,11 +289,11 @@
     <Content Include="Views\ProductOrders\Details.cshtml" />
     <Content Include="Views\ProductOrders\Edit.cshtml" />
     <Content Include="Views\ProductOrders\Index.cshtml" />
-    <Content Include="Views\CataloguedProducts\Create.cshtml" />
-    <Content Include="Views\CataloguedProducts\Delete.cshtml" />
-    <Content Include="Views\CataloguedProducts\Details.cshtml" />
-    <Content Include="Views\CataloguedProducts\Edit.cshtml" />
-    <Content Include="Views\CataloguedProducts\Index.cshtml" />
+    <Content Include="Views\Staffs\Create.cshtml" />
+    <Content Include="Views\Staffs\Delete.cshtml" />
+    <Content Include="Views\Staffs\Details.cshtml" />
+    <Content Include="Views\Staffs\Edit.cshtml" />
+    <Content Include="Views\Staffs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

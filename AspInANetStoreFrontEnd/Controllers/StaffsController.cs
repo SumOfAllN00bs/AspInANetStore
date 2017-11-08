@@ -10,116 +10,107 @@ using AspInANetStoreFrontEnd.Models;
 
 namespace AspInANetStoreFrontEnd.Controllers
 {
-    public class CataloguedProductsController : Controller
+    public class StaffsController : Controller
     {
         private AspInANetStoreDatabaseEntities1 db = new AspInANetStoreDatabaseEntities1();
 
-        // GET: CataloguedProducts
+        // GET: Staffs
         public ActionResult Index()
         {
-            var cataloguedProducts = db.CataloguedProducts.Include(c => c.Catalogue).Include(c => c.Product);
-            return View(cataloguedProducts.ToList());
+            return View(db.Staffs.ToList());
         }
 
-        // GET: CataloguedProducts/Details/5
+        // GET: Staffs/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CataloguedProduct cataloguedProduct = db.CataloguedProducts.Find(id);
-            if (cataloguedProduct == null)
+            Staff staff = db.Staffs.Find(id);
+            if (staff == null)
             {
                 return HttpNotFound();
             }
-            return View(cataloguedProduct);
+            return View(staff);
         }
 
-        // GET: CataloguedProducts/Create
+        // GET: Staffs/Create
         public ActionResult Create()
         {
-            ViewBag.CatalogueId = new SelectList(db.Catalogues, "Id", "Name");
-            ViewBag.ProductId = new SelectList(db.Products, "Id", "ProductName");
             return View();
         }
 
-        // POST: CataloguedProducts/Create
+        // POST: Staffs/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CatalogueId,ProductId")] CataloguedProduct cataloguedProduct)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,UserName,PasswordHash,Salt")] Staff staff)
         {
             if (ModelState.IsValid)
             {
-                db.CataloguedProducts.Add(cataloguedProduct);
+                db.Staffs.Add(staff);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CatalogueId = new SelectList(db.Catalogues, "Id", "Name", cataloguedProduct.CatalogueId);
-            ViewBag.ProductId = new SelectList(db.Products, "Id", "ProductName", cataloguedProduct.ProductId);
-            return View(cataloguedProduct);
+            return View(staff);
         }
 
-        // GET: CataloguedProducts/Edit/5
+        // GET: Staffs/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CataloguedProduct cataloguedProduct = db.CataloguedProducts.Find(id);
-            if (cataloguedProduct == null)
+            Staff staff = db.Staffs.Find(id);
+            if (staff == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CatalogueId = new SelectList(db.Catalogues, "Id", "Name", cataloguedProduct.CatalogueId);
-            ViewBag.ProductId = new SelectList(db.Products, "Id", "ProductName", cataloguedProduct.ProductId);
-            return View(cataloguedProduct);
+            return View(staff);
         }
 
-        // POST: CataloguedProducts/Edit/5
+        // POST: Staffs/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CatalogueId,ProductId")] CataloguedProduct cataloguedProduct)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,UserName,PasswordHash,Salt")] Staff staff)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cataloguedProduct).State = EntityState.Modified;
+                db.Entry(staff).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CatalogueId = new SelectList(db.Catalogues, "Id", "Name", cataloguedProduct.CatalogueId);
-            ViewBag.ProductId = new SelectList(db.Products, "Id", "ProductName", cataloguedProduct.ProductId);
-            return View(cataloguedProduct);
+            return View(staff);
         }
 
-        // GET: CataloguedProducts/Delete/5
+        // GET: Staffs/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CataloguedProduct cataloguedProduct = db.CataloguedProducts.Find(id);
-            if (cataloguedProduct == null)
+            Staff staff = db.Staffs.Find(id);
+            if (staff == null)
             {
                 return HttpNotFound();
             }
-            return View(cataloguedProduct);
+            return View(staff);
         }
 
-        // POST: CataloguedProducts/Delete/5
+        // POST: Staffs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CataloguedProduct cataloguedProduct = db.CataloguedProducts.Find(id);
-            db.CataloguedProducts.Remove(cataloguedProduct);
+            Staff staff = db.Staffs.Find(id);
+            db.Staffs.Remove(staff);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AspInANetStoreDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AspInANetStoreDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__RefactorLog">
           <Key>
             <PropertyRef Name="OperationKey" />
@@ -68,6 +68,17 @@
           <Property Name="Description" Type="varchar(max)" />
           <Property Name="Type" Type="varchar" MaxLength="50" />
           <Property Name="Stocked" Type="int" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Salt" Type="varbinary" MaxLength="512" Nullable="false" />
         </EntityType>
         <Association Name="FK_CataloguedProducts_Catalogue_Id">
           <End Role="Catalogue" Type="Self.Catalogue" Multiplicity="1" />
@@ -137,6 +148,7 @@
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductOrders" EntityType="Self.ProductOrders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_CataloguedProducts_Catalogue_Id" Association="Self.FK_CataloguedProducts_Catalogue_Id">
             <End Role="Catalogue" EntitySet="Catalogue" />
             <End Role="CataloguedProducts" EntitySet="CataloguedProducts" />
@@ -158,8 +170,7 @@
             <End Role="ProductOrders" EntitySet="ProductOrders" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AspInANetStoreDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -237,6 +248,17 @@
           <NavigationProperty Name="CataloguedProducts" Relationship="Self.FK_CataloguedProducts_Product_Id" FromRole="Products" ToRole="CataloguedProducts" />
           <NavigationProperty Name="ProductOrders" Relationship="Self.FK_ProductOrders_Product_Id" FromRole="Products" ToRole="ProductOrders" />
         </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Salt" Type="Binary" Nullable="false" MaxLength="512" FixedLength="false" />
+        </EntityType>
         <Association Name="FK_CataloguedProducts_Catalogue_Id">
           <End Role="Catalogue" Type="Self.Catalogue" Multiplicity="1" />
           <End Role="CataloguedProducts" Type="Self.CataloguedProduct" Multiplicity="*" />
@@ -297,7 +319,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="AspInANetStoreDatabaseEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="AspInANetStoreDatabaseEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
           <EntitySet Name="Catalogues" EntityType="Self.Catalogue" />
           <EntitySet Name="CataloguedProducts" EntityType="Self.CataloguedProduct" />
@@ -305,6 +327,7 @@
           <EntitySet Name="Orders" EntityType="Self.Order" />
           <EntitySet Name="ProductOrders" EntityType="Self.ProductOrder" />
           <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Staffs" EntityType="Self.Staff" />
           <AssociationSet Name="FK_CataloguedProducts_Catalogue_Id" Association="Self.FK_CataloguedProducts_Catalogue_Id">
             <End Role="Catalogue" EntitySet="Catalogues" />
             <End Role="CataloguedProducts" EntitySet="CataloguedProducts" />
@@ -331,7 +354,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="AspInANetStoreDatabaseModelStoreContainer" CdmEntityContainer="AspInANetStoreDatabaseEntities">
+        <EntityContainerMapping StorageEntityContainer="AspInANetStoreDatabaseModelStoreContainer" CdmEntityContainer="AspInANetStoreDatabaseEntities1">
           <EntitySetMapping Name="C__RefactorLog">
             <EntityTypeMapping TypeName="AspInANetStoreDatabaseModel.C__RefactorLog">
               <MappingFragment StoreEntitySet="__RefactorLog">
@@ -400,6 +423,18 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Stocked" ColumnName="Stocked" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staffs">
+            <EntityTypeMapping TypeName="AspInANetStoreDatabaseModel.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -12,7 +12,7 @@ namespace AspInANetStoreFrontEnd.Controllers
 {
     public class ProductOrdersController : Controller
     {
-        private AspInANetStoreDatabaseEntities db = new AspInANetStoreDatabaseEntities();
+        private AspInANetStoreDatabaseEntities1 db = new AspInANetStoreDatabaseEntities1();
 
         // GET: ProductOrders
         public ActionResult Index()

@@ -104,3 +104,15 @@ ON Target.Id = Source.Id
 WHEN NOT MATCHED BY TARGET THEN
 INSERT (OrderId, ProductId, Quantity) 
 VALUES (OrderId, ProductId, Quantity);
+
+/*Set up the Staff*/
+MERGE INTO Staff AS Target
+USING (VALUES 
+		(1, 'Kyle', 'Harvey', 'KHarvey', '19Cq6j+DtmhK974Z0efKJO9qbfKKXALXOuiacEnEOFK/gNYffnd2dLfqbVS+nRCbDeFJs2UzD6ivPm/7rJGBggVNmmvpwIV9jx/0oCS9PwsYFHttBHXSJJeahH8NyASG', 0x054D9A6BE9C0857D8F1FF4A024BD3F0B18147B6D0475D224979A847F0DC80486),
+		(2, 'General', 'Any', 'admin', 'WghSVGISgGLBbOcQk70MIOzXCosiFk1/wFWUtF5+Ga/TtfcOtkBJch1uBT2Tfuh1WxmmDaF4uKIIAGYhjX/zY8m4XNHBOPChqnA4xuo3myCC5CLqLYBWSW8g/lVurU3f', 0xC9B85CD1C138F0A1AA7038C6EA379B2082E422EA2D8056496F20FE556EAD4DDF)
+)
+AS Source(Id, FirstName, LastName, UserName, PasswordHash, Salt) 
+ON Target.Id = Source.Id
+WHEN NOT MATCHED BY TARGET THEN
+INSERT (FirstName, LastName, UserName, PasswordHash, Salt)  
+VALUES (FirstName, LastName, UserName, PasswordHash, Salt); 

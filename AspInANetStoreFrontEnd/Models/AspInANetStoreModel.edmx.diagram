@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4fb3a0c391f7468396fee793ea8bf448" Name="Diagram1">
+        <EntityTypeShape EntityType="AspInANetStoreDatabaseModel.C__RefactorLog" Width="1.5" PointX="9.5" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AspInANetStoreDatabaseModel.Catalogue" Width="1.5" PointX="6.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AspInANetStoreDatabaseModel.CataloguedProduct" Width="1.5" PointX="6.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="AspInANetStoreDatabaseModel.Customer" Width="1.5" PointX="1" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AspInANetStoreDatabaseModel.Order" Width="1.5" PointX="0.5" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AspInANetStoreDatabaseModel.ProductOrder" Width="1.5" PointX="2.5" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AspInANetStoreDatabaseModel.Product" Width="1.5" PointX="4.625" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AspInANetStoreDatabaseModel.Staff" Width="1.5" PointX="3.25" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="AspInANetStoreDatabaseModel.FK_CataloguedProducts_Catalogue_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="AspInANetStoreDatabaseModel.FK_CataloguedProducts_Product_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="AspInANetStoreDatabaseModel.FK_Orders_Customer_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="AspInANetStoreDatabaseModel.FK_ProductOrders_Order_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="AspInANetStoreDatabaseModel.FK_ProductOrders_Product_Id" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

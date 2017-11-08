@@ -13,10 +13,10 @@ namespace AspInANetStoreFrontEnd.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class AspInANetStoreDatabaseEntities : DbContext
+    public partial class AspInANetStoreDatabaseEntities1 : DbContext
     {
-        public AspInANetStoreDatabaseEntities()
-            : base("name=AspInANetStoreDatabaseEntities")
+        public AspInANetStoreDatabaseEntities1()
+            : base("name=AspInANetStoreDatabaseEntities1")
         {
         }
     
@@ -32,5 +32,6 @@ namespace AspInANetStoreFrontEnd.Models
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<ProductOrder> ProductOrders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Staff> Staffs { get; set; }
     }
 }
