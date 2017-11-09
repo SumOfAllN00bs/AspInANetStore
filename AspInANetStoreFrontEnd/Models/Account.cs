@@ -12,26 +12,24 @@ namespace AspInANetStoreFrontEnd.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Customer
+    public partial class Account
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Customer()
+        public Account()
         {
-            this.Orders = new HashSet<Order>();
+            this.Customers = new HashSet<Customer>();
+            this.Staffs = new HashSet<Staff>();
         }
     
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string MiddleName { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
-        public string Address { get; set; }
-        public Nullable<double> BitCoinAmount { get; set; }
-        public int AccountId { get; set; }
+        public string Username { get; set; }
+        public string PasswordHash { get; set; }
+        public byte[] Salt { get; set; }
+        public System.DateTime DateJoined { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
-        public virtual Account Account { get; set; }
+        public virtual ICollection<Customer> Customers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Staff> Staffs { get; set; }
     }
 }

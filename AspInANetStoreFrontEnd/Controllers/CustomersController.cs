@@ -17,7 +17,8 @@ namespace AspInANetStoreFrontEnd.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            return View(db.Customers.ToList());
+            var customers = db.Customers.Include(c => c.Account);
+            return View(customers.ToList());
         }
 
         // GET: Customers/Details/5
@@ -38,6 +39,7 @@ namespace AspInANetStoreFrontEnd.Controllers
         // GET: Customers/Create
         public ActionResult Create()
         {
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Username");
             return View();
         }
 
@@ -46,7 +48,7 @@ namespace AspInANetStoreFrontEnd.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,MiddleName,Phone,Email,Address,BitCoinAmount,DateJoined")] Customer customer)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,MiddleName,Phone,Email,Address,BitCoinAmount,AccountId")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -55,6 +57,7 @@ namespace AspInANetStoreFrontEnd.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Username", customer.AccountId);
             return View(customer);
         }
 
@@ -70,6 +73,7 @@ namespace AspInANetStoreFrontEnd.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Username", customer.AccountId);
             return View(customer);
         }
 
@@ -78,7 +82,7 @@ namespace AspInANetStoreFrontEnd.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,MiddleName,Phone,Email,Address,BitCoinAmount,DateJoined")] Customer customer)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,MiddleName,Phone,Email,Address,BitCoinAmount,AccountId")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +90,7 @@ namespace AspInANetStoreFrontEnd.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Username", customer.AccountId);
             return View(customer);
         }
 

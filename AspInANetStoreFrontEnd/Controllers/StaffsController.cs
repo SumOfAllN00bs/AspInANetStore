@@ -17,7 +17,8 @@ namespace AspInANetStoreFrontEnd.Controllers
         // GET: Staffs
         public ActionResult Index()
         {
-            return View(db.Staffs.ToList());
+            var staffs = db.Staffs.Include(s => s.Account);
+            return View(staffs.ToList());
         }
 
         // GET: Staffs/Details/5
@@ -38,6 +39,7 @@ namespace AspInANetStoreFrontEnd.Controllers
         // GET: Staffs/Create
         public ActionResult Create()
         {
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Username");
             return View();
         }
 
@@ -46,7 +48,7 @@ namespace AspInANetStoreFrontEnd.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,UserName,PasswordHash,Salt")] Staff staff)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,AccountId")] Staff staff)
         {
             if (ModelState.IsValid)
             {
@@ -55,6 +57,7 @@ namespace AspInANetStoreFrontEnd.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Username", staff.AccountId);
             return View(staff);
         }
 
@@ -70,6 +73,7 @@ namespace AspInANetStoreFrontEnd.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Username", staff.AccountId);
             return View(staff);
         }
 
@@ -78,7 +82,7 @@ namespace AspInANetStoreFrontEnd.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,UserName,PasswordHash,Salt")] Staff staff)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,AccountId")] Staff staff)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +90,7 @@ namespace AspInANetStoreFrontEnd.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Username", staff.AccountId);
             return View(staff);
         }
 

@@ -33,5 +33,6 @@ namespace AspInANetStoreFrontEnd.Models
         public virtual DbSet<ProductOrder> ProductOrders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Staff> Staffs { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; }
     }
 }

@@ -8,5 +8,6 @@
 	[Email] VarChar(254),/*https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address*/
 	[Address] VarChar(256) NOT NULL,
 	[BitCoinAmount] float default 0.0,
-	[DateJoined] Date NOT NULL
+	[AccountId] INT NOT NULL,
+	CONSTRAINT FK_Customers_Account_Id FOREIGN KEY(AccountId) REFERENCES [dbo].[Account](Id)
 )

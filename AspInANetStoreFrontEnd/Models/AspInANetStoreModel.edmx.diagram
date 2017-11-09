@@ -8,16 +8,19 @@
         <EntityTypeShape EntityType="AspInANetStoreDatabaseModel.C__RefactorLog" Width="1.5" PointX="9.5" PointY="0.625" IsExpanded="true" />
         <EntityTypeShape EntityType="AspInANetStoreDatabaseModel.Catalogue" Width="1.5" PointX="6.75" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="AspInANetStoreDatabaseModel.CataloguedProduct" Width="1.5" PointX="6.5" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="AspInANetStoreDatabaseModel.Customer" Width="1.5" PointX="1" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AspInANetStoreDatabaseModel.Customer" Width="1.5" PointX="0.625" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="AspInANetStoreDatabaseModel.Order" Width="1.5" PointX="0.5" PointY="0.625" IsExpanded="true" />
         <EntityTypeShape EntityType="AspInANetStoreDatabaseModel.ProductOrder" Width="1.5" PointX="2.5" PointY="0.625" IsExpanded="true" />
         <EntityTypeShape EntityType="AspInANetStoreDatabaseModel.Product" Width="1.5" PointX="4.625" PointY="0.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AspInANetStoreDatabaseModel.Staff" Width="1.5" PointX="3.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AspInANetStoreDatabaseModel.Staff" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
         <AssociationConnector Association="AspInANetStoreDatabaseModel.FK_CataloguedProducts_Catalogue_Id" ManuallyRouted="false" />
         <AssociationConnector Association="AspInANetStoreDatabaseModel.FK_CataloguedProducts_Product_Id" ManuallyRouted="false" />
         <AssociationConnector Association="AspInANetStoreDatabaseModel.FK_Orders_Customer_ID" ManuallyRouted="false" />
         <AssociationConnector Association="AspInANetStoreDatabaseModel.FK_ProductOrders_Order_Id" ManuallyRouted="false" />
         <AssociationConnector Association="AspInANetStoreDatabaseModel.FK_ProductOrders_Product_Id" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AspInANetStoreDatabaseModel.Account" Width="1.5" PointX="2.75" PointY="3.25" />
+        <AssociationConnector Association="AspInANetStoreDatabaseModel.FK_Customers_Account_Id" />
+        <AssociationConnector Association="AspInANetStoreDatabaseModel.FK_Staff_Account_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

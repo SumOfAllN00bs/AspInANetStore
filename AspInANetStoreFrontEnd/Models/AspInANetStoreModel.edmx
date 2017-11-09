@@ -11,6 +11,16 @@
           </Key>
           <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Salt" Type="varbinary" MaxLength="512" Nullable="false" />
+          <Property Name="DateJoined" Type="date" Nullable="false" />
+        </EntityType>
         <EntityType Name="Catalogue">
           <Key>
             <PropertyRef Name="Id" />
@@ -40,7 +50,7 @@
           <Property Name="Email" Type="varchar" MaxLength="254" />
           <Property Name="Address" Type="varchar" MaxLength="256" Nullable="false" />
           <Property Name="BitCoinAmount" Type="float" />
-          <Property Name="DateJoined" Type="date" Nullable="false" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
@@ -76,9 +86,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="PasswordHash" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Salt" Type="varbinary" MaxLength="512" Nullable="false" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_CataloguedProducts_Catalogue_Id">
           <End Role="Catalogue" Type="Self.Catalogue" Multiplicity="1" />
@@ -101,6 +109,18 @@
             </Principal>
             <Dependent Role="CataloguedProducts">
               <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Account_Id">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="AccountId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -140,8 +160,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Staff_Account_Id">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="AspInANetStoreDatabaseModelStoreContainer">
           <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Catalogue" EntityType="Self.Catalogue" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CataloguedProducts" EntityType="Self.CataloguedProducts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
@@ -157,6 +190,10 @@
             <End Role="Products" EntitySet="Products" />
             <End Role="CataloguedProducts" EntitySet="CataloguedProducts" />
           </AssociationSet>
+          <AssociationSet Name="FK_Customers_Account_Id" Association="Self.FK_Customers_Account_Id">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
           <AssociationSet Name="FK_Orders_Customer_ID" Association="Self.FK_Orders_Customer_ID">
             <End Role="Customers" EntitySet="Customers" />
             <End Role="Orders" EntitySet="Orders" />
@@ -168,6 +205,10 @@
           <AssociationSet Name="FK_ProductOrders_Product_Id" Association="Self.FK_ProductOrders_Product_Id">
             <End Role="Products" EntitySet="Products" />
             <End Role="ProductOrders" EntitySet="ProductOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Account_Id" Association="Self.FK_Staff_Account_Id">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Staff" EntitySet="Staff" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -212,8 +253,9 @@
           <Property Name="Email" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="BitCoinAmount" Type="Double" />
-          <Property Name="DateJoined" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Customer_ID" FromRole="Customers" ToRole="Orders" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="AspInANetStoreDatabaseModel.FK_Customers_Account_Id" FromRole="Customer" ToRole="Account" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -255,9 +297,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Salt" Type="Binary" Nullable="false" MaxLength="512" FixedLength="false" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="AspInANetStoreDatabaseModel.FK_Staff_Account_Id" FromRole="Staff" ToRole="Account" />
         </EntityType>
         <Association Name="FK_CataloguedProducts_Catalogue_Id">
           <End Role="Catalogue" Type="Self.Catalogue" Multiplicity="1" />
@@ -348,7 +389,52 @@
             <End Role="Products" EntitySet="Products" />
             <End Role="ProductOrders" EntitySet="ProductOrders" />
           </AssociationSet>
+          <EntitySet Name="Accounts" EntityType="AspInANetStoreDatabaseModel.Account" />
+          <AssociationSet Name="FK_Customers_Account_Id" Association="AspInANetStoreDatabaseModel.FK_Customers_Account_Id">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Account_Id" Association="AspInANetStoreDatabaseModel.FK_Staff_Account_Id">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Staff" EntitySet="Staffs" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Salt" Type="Binary" Nullable="false" MaxLength="512" FixedLength="false" />
+          <Property Name="DateJoined" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Customers" Relationship="AspInANetStoreDatabaseModel.FK_Customers_Account_Id" FromRole="Account" ToRole="Customer" />
+          <NavigationProperty Name="Staffs" Relationship="AspInANetStoreDatabaseModel.FK_Staff_Account_Id" FromRole="Account" ToRole="Staff" />
+        </EntityType>
+        <Association Name="FK_Customers_Account_Id">
+          <End Type="AspInANetStoreDatabaseModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="AspInANetStoreDatabaseModel.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Account_Id">
+          <End Type="AspInANetStoreDatabaseModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="AspInANetStoreDatabaseModel.Staff" Role="Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -384,6 +470,7 @@
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="AspInANetStoreDatabaseModel.Customer">
               <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -392,7 +479,6 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="BitCoinAmount" ColumnName="BitCoinAmount" />
-                <ScalarProperty Name="DateJoined" ColumnName="DateJoined" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -429,12 +515,21 @@
           <EntitySetMapping Name="Staffs">
             <EntityTypeMapping TypeName="AspInANetStoreDatabaseModel.Staff">
               <MappingFragment StoreEntitySet="Staff">
-                <ScalarProperty Name="Salt" ColumnName="Salt" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="AspInANetStoreDatabaseModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="DateJoined" ColumnName="DateJoined" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

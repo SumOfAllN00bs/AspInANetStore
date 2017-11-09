@@ -33,7 +33,7 @@
             @Html.DisplayNameFor(model => model.BitCoinAmount)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DateJoined)
+            @Html.DisplayNameFor(model => model.Account.Username)
         </th>
         <th></th>
     </tr>
@@ -62,7 +62,7 @@
             @Html.DisplayFor(modelItem => item.BitCoinAmount)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DateJoined)
+            @Html.DisplayFor(modelItem => item.Account.Username)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
