@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Security.Principal;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
@@ -11,7 +12,7 @@ namespace AspInANetStoreFrontEnd.Controllers
 {
     public class HomeController : Controller
     {
-        static int saltLengthLimit = 32;
+        //static int saltLengthLimit = 32;
         public ActionResult Index() => View();
 
         public ActionResult Login() => View();
@@ -24,7 +25,7 @@ namespace AspInANetStoreFrontEnd.Controllers
             {
                 using(Models.AspInANetStoreDatabaseEntities1 db = new Models.AspInANetStoreDatabaseEntities1())
                 {
-                    var obj = db.Accounts.Where(a => a.Username == Username.Trim()).FirstOrDefault();
+                    var obj = db.Accounts.Where(a => a.Username.Trim() == Username.Trim()).FirstOrDefault();
                     if (obj != null)
                     {
                         var PasswordHash = obj.PasswordHash;
@@ -53,6 +54,23 @@ namespace AspInANetStoreFrontEnd.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Logout()
+        {
+            try
+            {
+                FormsAuthentication.SignOut();
+                HttpContext.User = new GenericPrincipal(new GenericIdentity(string.Empty), null);
+                Session.Clear();
+                System.Web.HttpContext.Current.Session.RemoveAll();
+                return RedirectToAction("Index", "Home");
+            }
+            catch
+            {
+                throw;
+            }
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

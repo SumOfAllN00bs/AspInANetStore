@@ -8,15 +8,41 @@
                 </button>
                 @Html.ActionLink("Asp In A Net", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse">       
+
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Customer Sign In", "Login", "Home")</li>
-                    <li>@Html.ActionLink("Stafff Sign In", "Login", "Home")</li>
+                    @if(Session["UserId"] != null)
+                    {
+                        using (Html.BeginForm("Logout", "Home", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                        @Html.AntiForgeryToken()
+                            <li>
+                                @using (AspInANetStoreFrontEnd.Models.AspInANetStoreDatabaseEntities1 db = new AspInANetStoreFrontEnd.Models.AspInANetStoreDatabaseEntities1())
+                                {
+                                    int? id = Session["UserId"] as int?;
+                                    if (id != null)
+                                    {
+                                        Html.Label("Hello " + db.Accounts.Where(a => a.Id == id).FirstOrDefault().Username);
+                                    }
+                                    else
+                                    {
+                                        ViewBag.Message = "Error #03: Something weird happened";
+                                        Html.Action("Login", "Home");
+                                    }
+                                }
+                            </li>
+                            <li><a class="navbar-right" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                        }
+                    } else
+                    {
+                        <li>@Html.ActionLink("Register", "Register", "Home", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                        <li>@Html.ActionLink("Sign In", "Login", "Home", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    }
                 </ul>
             </div>
         </div>
