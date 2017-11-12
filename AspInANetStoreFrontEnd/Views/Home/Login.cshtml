@@ -2,5 +2,17 @@
     ViewBag.Title = "Login";
 }
 <h2>Login</h2>
-@Html.Editor("Username")
-@Html.Editor("Password")
+@using (Html.BeginForm("Login", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    if(ViewBag.Message != null)
+    {
+        <div style="border: 1px solid red">
+            @ViewBag.Message
+        </div>
+    }
+    @Html.TextBox("Username") <br />
+    @Html.Password("Password") <br />
+    <input type="submit" value="Login" class="button"/>
+}
