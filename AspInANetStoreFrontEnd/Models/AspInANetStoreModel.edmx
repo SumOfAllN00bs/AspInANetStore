@@ -29,6 +29,7 @@
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="Description" Type="varchar" MaxLength="150" />
           <Property Name="ExtraCatalogueCost" Type="float" />
+          <Property Name="CatagoryImage" Type="varchar" MaxLength="2048" />
         </EntityType>
         <EntityType Name="CataloguedProducts">
           <Key>
@@ -74,6 +75,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductName" Type="varchar" MaxLength="50" />
+          <Property Name="ProductImage" Type="varchar" MaxLength="2048" />
           <Property Name="BaseCost" Type="float" />
           <Property Name="Description" Type="varchar(max)" />
           <Property Name="Type" Type="varchar" MaxLength="50" />
@@ -230,6 +232,7 @@
           <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="ExtraCatalogueCost" Type="Double" />
           <NavigationProperty Name="CataloguedProducts" Relationship="Self.FK_CataloguedProducts_Catalogue_Id" FromRole="Catalogue" ToRole="CataloguedProducts" />
+          <Property Name="CatagoryImage" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="CataloguedProduct">
           <Key>
@@ -289,6 +292,7 @@
           <Property Name="Stocked" Type="Int32" />
           <NavigationProperty Name="CataloguedProducts" Relationship="Self.FK_CataloguedProducts_Product_Id" FromRole="Products" ToRole="CataloguedProducts" />
           <NavigationProperty Name="ProductOrders" Relationship="Self.FK_ProductOrders_Product_Id" FromRole="Products" ToRole="ProductOrders" />
+          <Property Name="ProductImage" Type="String" MaxLength="2048" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Staff">
           <Key>
@@ -451,6 +455,7 @@
           <EntitySetMapping Name="Catalogues">
             <EntityTypeMapping TypeName="AspInANetStoreDatabaseModel.Catalogue">
               <MappingFragment StoreEntitySet="Catalogue">
+                <ScalarProperty Name="CatagoryImage" ColumnName="CatagoryImage" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -503,6 +508,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="AspInANetStoreDatabaseModel.Product">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="BaseCost" ColumnName="BaseCost" />

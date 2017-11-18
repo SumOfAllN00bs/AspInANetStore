@@ -1,24 +1,40 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    //Todo: resolve Catagory image href below
+    //Todo: seperate colors for each category of pet
+    //Todo: Get Everything done in a week
+    //Todo: Don't neglect contact and about pages
 }
 <div class="row">
     <div class="col-md-2 col-sm-1">
     </div>
     <div class="col-md-8 col-sm-8">
         <h2>Asp In A Net: The Dangerous Pet Shop</h2>
-        <p>
-            You can find all your dangerous pet needs here on Asp In A Net. Where you can buy asp's nets to catch more asps. Crocodiles, large cages for crocodiles. Pumas and their cousins lions. Or spiders venomous or otherwise.
-        </p>
+        @*<p class="bg-info text-success">*@
+            <p class="bg-primary text-success">You can find all your dangerous pet needs here on Asp In A Net.</p>
+            <p class="bg-success text-success">Where you can buy snakes (and nets to help you catch those snakes that get loose in your house).</p>
+            <p class="bg-info text-success">Crocodiles, large cages for crocodiles. </p>
+            <p class="bg-warning text-success">Lions, tigers and bears (Actually bears are out of stock).</p>
+            <p class="bg-danger text-success">And spiders venomous or otherwise.</p>
+        @*</p>*@
     </div>
     <div class="col-md-2 col-sm-1">
     </div>
 </div>
-<div class="links">
-    @Html.ActionLink("Catalogued Products", "Index", "CataloguedProducts")<br />
-    @Html.ActionLink("Catalogues", "Index", "Catalogues")<br />
-    @Html.ActionLink("Customers", "Index", "Customers")<br />
-    @Html.ActionLink("Orders", "Index", "Orders")<br />
-    @Html.ActionLink("Product Orders", "Index", "ProductOrders")<br />
-    @Html.ActionLink("Products", "Index", "Products")<br />
-    @Html.ActionLink("Staff", "Index", "Staffs")<br />
+<div class="row">
+    @using (AspInANetStoreFrontEnd.Models.AspInANetStoreDatabaseEntities1 db = new AspInANetStoreFrontEnd.Models.AspInANetStoreDatabaseEntities1())
+    {
+        foreach (AspInANetStoreFrontEnd.Models.Catalogue Catagory in db.Catalogues)
+        {
+            <div class="col-md-3">
+                <a href='@Url.Action("MyAction", "MyController")'>
+
+                    <img class="img-responsive img-rounded" src="@Catagory.CatagoryImage">
+                    <div class="caption">
+                        <p>@Catagory.Name</p>
+                    </div>
+                </a>
+            </div>
+        }
+    }
 </div>

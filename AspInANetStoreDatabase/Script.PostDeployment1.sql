@@ -1,16 +1,17 @@
-﻿/*Set up the Catalogue*/
+﻿/*Set up the Catalogue / catagory*/
 MERGE INTO Catalogue AS Target
 USING (VALUES 
-		(1, 'Snakes','A dangerous pet to have, potentially venomous. Extra cost for defanging', 100),
-		(2, 'Crocodiles', 'Easy to look after, just throw them a hunk of meat every other day. No extra cost', 0),
-		(3, 'Felines', 'From Leopards to Lions, from Cougar''s to Cheetah''s, we have all kinds of cats. Extra cost for neutering', 50),
-		(4, 'Spiders','We have every major spider species on the planet but we specialize in Tarantulas, No extra cost', 0)
+		(1, 'Snakes','A dangerous pet to have, potentially venomous. Extra cost for defanging', 100, 'https://s.hswstatic.com/gif/snakes-toilet-pipe-orig.jpg'),
+		(2, 'Crocodiles', 'Easy to look after, just throw them a hunk of meat every other day. No extra cost', 0,'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Nile_crocodile_head.jpg/1200px-Nile_crocodile_head.jpg'),
+		(3, 'Felines', 'From Leopards to Lions, from Cougar''s to Cheetah''s, we have all kinds of cats. Extra cost for neutering', 50,'https://www.wildvoyager.com/wp-content/uploads/2016/11/20150727-DSC_8962-2.jpg'),
+		(4, 'Spiders','We have every major spider species on the planet but we specialize in Tarantulas, No extra cost', 0,'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Orb_weaver_spider_day_web03.jpg/1200px-Orb_weaver_spider_day_web03.jpg')
 )
-AS Source(Id, Name, Description, ExtraCatalogueCost)
+AS Source(Id, Name, Description, ExtraCatalogueCost, CatagoryImage)
 ON Target.Id = Source.Id
 WHEN NOT MATCHED BY TARGET THEN
-INSERT (Name, Description, ExtraCatalogueCost)
-VALUES (Name, Description, ExtraCatalogueCost);
+INSERT (Name, Description, ExtraCatalogueCost, CatagoryImage)
+VALUES (Name, Description, ExtraCatalogueCost, CatagoryImage);
+
 /*Set up the Account*/
 MERGE INTO Account AS Target
 USING (VALUES /*Customer passwords are their phone number*/
@@ -53,24 +54,24 @@ VALUES (FirstName, LastName, MiddleName, Phone, Email, Address, BitCoinAmount, A
 /*Set up the Products*/
 MERGE INTO Products AS Target
 USING (VALUES 
-		(1, 'Vipera aspis', 300, 'Vipera aspis is a venomous viper species found in southwestern Europe', 'Asp', 100),
-		(2, 'King cobra (Ophiophagus hannah)', 500, 'This serpent is the world''s longest venomous snake. Adult king cobras are 3.18 to 4 m (10.4 to 13.1 ft) long.', 'Cobra', 50),
-		(3, 'Grass snake (Natrix natrix)', 450, 'The grass snake is typically dark green or brown in colour with a characteristic yellow collar behind the head, which explains the alternative name ringed snake', 'Grass Snake', 10),
-		(4, 'Dwarf crocodile (Osteolaemus tetraspis)', 800, 'The dwarf crocodile (Osteolaemus tetraspis), also known commonly as the African dwarf crocodile, broad-snouted crocodile, or bony crocodile, is an African crocodile that is also the smallest extant crocodile species.', 'Crocodile', 20),
-		(5, 'Slender-snouted crocodile (Mecistops cataphractus)',1000, 'Slender-snouted crocodiles are native to freshwater habitats in central and western Africa. They are medium-sized crocodiles, typically slightly smaller than the Nile crocodile, but are larger than several other species of crocodilians.', 'Crocodile',2),
-		(6, 'Freshwater crocodile (Crocodylus johnsoni)', 900, 'The freshwater crocodile is a relatively small crocodilian. Males can grow to 2.3–3 m (7.5–9.8 ft) long, while females reach a maximum size of 2.1 m (6.9 ft).', 'Fresh water Crocodile', 80),
-		(7, 'Leopard (Panthera pardus)', 400, 'Compared to other members of Felidae, the leopard has relatively short legs and a long body with a large skull.', 'Leopard', 10),
-		(8, 'Cougar (Puma concolor)', 450, 'The cougar is an ambush predator and pursues a wide variety of prey. Primary food sources are ungulates, particularly deer, but also livestock. It also hunts species as small as insects and rodents.', 'Cougar', 1),
-		(9, 'Cheetah (Acinonyx jubatus)', 300,'Cheetahs are active mainly during the day, with hunting their major activity. Adult males are sociable despite their territoriality, forming groups called ''coalitions''.', 'Cheetah', 30),
-		(10, 'Redback spider (Latrodectus hasseltii)', 100, 'Mainly nocturnal, the female redback lives in an untidy web in a warm sheltered location, commonly near or inside human residences. It preys on insects, spiders and small vertebrates that become ensnared in its web.', 'Spider', 14),
-		(11, 'Goliath birdeater (Theraphosa blondi)', 120, 'The goliath birdeater is native to the upland rain forest regions of northern South America: Suriname, Guyana, French Guiana, northern Brazil and southern Venezuela.', 'Tarantula', 12),
-		(12, 'Antilles pinktoe tarantula (Caribena versicolor)', 300, 'Spiderlings of C. versicolor are bright blue, with a black tree trunk pattern on the abdomen. As they grow, they gradually lose their blue coloration; the carapace turns green, the abdomen red, and the legs turn green with pink tarsi and a covering of purple hairs.', 'Tarantula', 7)
+		(1, 'Vipera aspis', 'http://www.freenatureimages.eu/animals/Reptilia,%20Reptielen,%20Reptiles/Vipera%20aspis,%20Asp%20Viper/Vipera%20aspis%205,%20Aspisadder,%20Saxifraga-Edo%20van%20Uchelen.jpg', 300, 'Vipera aspis is a venomous viper species found in southwestern Europe', 'Asp', 100),
+		(2, 'King cobra (Ophiophagus hannah)', 'https://www.likefigures.com/media/catalog/product/cache/1/image/1200x/040ec09b1e35df139433887a97daa66f/c/o/cobra-snake-widesscreen-wallpapers-free-snakes-background-images.jpg', 500, 'This serpent is the world''s longest venomous snake. Adult king cobras are 3.18 to 4 m (10.4 to 13.1 ft) long.', 'Cobra', 50),
+		(3, 'Grass snake (Natrix natrix)', 'http://freenatureimages.eu/Animals/Reptilia,%20Reptielen,%20Reptiles/Natrix%20tesselata,%20Dice%20Snake/Natrix%20tesselata%207,%20Saxifraga-Edo%20van%20Uchelen.jpg', 450, 'The grass snake is typically dark green or brown in colour with a characteristic yellow collar behind the head, which explains the alternative name ringed snake', 'Grass Snake', 10),
+		(4, 'Dwarf crocodile (Osteolaemus tetraspis)', 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Yacare_Caiman_(Caiman_yacare)_(28779955571).jpg/1200px-Yacare_Caiman_(Caiman_yacare)_(28779955571).jpg', 800, 'The dwarf crocodile (Osteolaemus tetraspis), also known commonly as the African dwarf crocodile, broad-snouted crocodile, or bony crocodile, is an African crocodile that is also the smallest extant crocodile species.', 'Crocodile', 20),
+		(5, 'Slender-snouted crocodile (Mecistops cataphractus)', 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Crocodylus_cataphractus.jpg/1200px-Crocodylus_cataphractus.jpg',1000, 'Slender-snouted crocodiles are native to freshwater habitats in central and western Africa. They are medium-sized crocodiles, typically slightly smaller than the Nile crocodile, but are larger than several other species of crocodilians.', 'Crocodile',2),
+		(6, 'Freshwater crocodile (Crocodylus johnsoni)', 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Indian_Gharial_Crocodile_Digon3.JPG/1200px-Indian_Gharial_Crocodile_Digon3.JPG', 900, 'The freshwater crocodile is a relatively small crocodilian. Males can grow to 2.3–3 m (7.5–9.8 ft) long, while females reach a maximum size of 2.1 m (6.9 ft).', 'Fresh water Crocodile', 80),
+		(7, 'Leopard (Panthera pardus)', 'http://upload.wikimedia.org/wikipedia/commons/c/c9/Flickr_-_Rainbirder_-_Sassy_Lassy.jpg', 400, 'Compared to other members of Felidae, the leopard has relatively short legs and a long body with a large skull.', 'Leopard', 10),
+		(8, 'Cougar (Puma concolor)', 'https://i1.wp.com/www.onegreenplanet.org/wp-content/uploads/2017/02/panther.jpg?fit=1200,800', 450, 'The cougar is an ambush predator and pursues a wide variety of prey. Primary food sources are ungulates, particularly deer, but also livestock. It also hunts species as small as insects and rodents.', 'Cougar', 1),
+		(9, 'Cheetah (Acinonyx jubatus)', 'https://stories.sandisk.com/assets/images/orig/0150-Cheetahs.jpg', 300,'Cheetahs are active mainly during the day, with hunting their major activity. Adult males are sociable despite their territoriality, forming groups called ''coalitions''.', 'Cheetah', 30),
+		(10, 'Redback spider (Latrodectus hasseltii)', 'https://media.buzzle.com/media/images-en/gallery/arthropods/spiders/1200-509673472-black-widow-spider.jpg', 100, 'Mainly nocturnal, the female redback lives in an untidy web in a warm sheltered location, commonly near or inside human residences. It preys on insects, spiders and small vertebrates that become ensnared in its web.', 'Spider', 14),
+		(11, 'Goliath birdeater (Theraphosa blondi)', 'https://s3.amazonaws.com/plugpolo/poloup/up/a/a29/a2963030d4dd4a03a8fb95519887ab9b/img1.jpg', 120, 'The goliath birdeater is native to the upland rain forest regions of northern South America: Suriname, Guyana, French Guiana, northern Brazil and southern Venezuela.', 'Tarantula', 12),
+		(12, 'Antilles pinktoe tarantula (Caribena versicolor)', 'http://www.mikebasictarantula.com/Avicularia_versicolor__2_.JPG', 300, 'Spiderlings of C. versicolor are bright blue, with a black tree trunk pattern on the abdomen. As they grow, they gradually lose their blue coloration; the carapace turns green, the abdomen red, and the legs turn green with pink tarsi and a covering of purple hairs.', 'Tarantula', 7)
 )
-AS Source(Id, ProductName, BaseCost, Description, Type, Stocked)
+AS Source(Id, ProductName, ProductImage, BaseCost, Description, Type, Stocked)
 ON Target.Id = Source.Id
 WHEN NOT MATCHED BY TARGET THEN
-INSERT (ProductName, BaseCost, Description, Type, Stocked)
-VALUES (ProductName, BaseCost, Description, Type, Stocked);
+INSERT (ProductName, ProductImage, BaseCost, Description, Type, Stocked)
+VALUES (ProductName, ProductImage, BaseCost, Description, Type, Stocked);
 
 /*Set up the CataloguedProducts*/
 MERGE INTO CataloguedProducts AS Target

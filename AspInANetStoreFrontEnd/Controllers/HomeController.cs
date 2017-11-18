@@ -15,15 +15,23 @@ namespace AspInANetStoreFrontEnd.Controllers
         //static int saltLengthLimit = 32;
         public ActionResult Index() => View();
 
-        public ActionResult Login() => View();
+        [AllowAnonymous]
+        public ActionResult Login(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+
+        public ActionResult Register() => View();
 
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(string Username, string Password)
+        public ActionResult Login(string Username, string Password, string ReturnUrl)
         {
             if (ModelState.IsValid)
             {
-                using(Models.AspInANetStoreDatabaseEntities1 db = new Models.AspInANetStoreDatabaseEntities1())
+                using (Models.AspInANetStoreDatabaseEntities1 db = new Models.AspInANetStoreDatabaseEntities1())
                 {
                     var obj = db.Accounts.Where(a => a.Username.Trim() == Username.Trim()).FirstOrDefault();
                     if (obj != null)
@@ -31,11 +39,15 @@ namespace AspInANetStoreFrontEnd.Controllers
                         var PasswordHash = obj.PasswordHash;
                         var Salt = obj.Salt;
 
-                        if(ComparePasswordHash(Password, Username, PasswordHash, Salt))
+                        if (ComparePasswordHash(Password, Username, PasswordHash, Salt))
                         {
                             FormsAuthentication.SignOut();
-                            FormsAuthentication.SetAuthCookie(Username, false);
+                            //FormsAuthentication.SetAuthCookie(Username, true);
                             Session["UserID"] = obj.Id;
+                            if (!string.IsNullOrEmpty(ReturnUrl) && Url.IsLocalUrl(ReturnUrl))
+                                return Redirect(ReturnUrl);
+                            else
+                                FormsAuthentication.SetAuthCookie(Username, true);
                             return RedirectToAction("Index");
                         }
                         else
@@ -71,20 +83,42 @@ namespace AspInANetStoreFrontEnd.Controllers
                 throw;
             }
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(AspInANetStoreFrontEnd.Models.Customer customer, string CustomerPassword)
+        {
+            if (ModelState.IsValid)
+            {
+                using (Models.AspInANetStoreDatabaseEntities1 db = new Models.AspInANetStoreDatabaseEntities1())
+                {
+                    db.Customers.Add(customer);
+                    byte[] s = SaltMe(32);
+                    customer.Account.DateJoined = DateTime.Now;
+                    customer.Account.Salt = s;
+                    customer.Account.PasswordHash = SHA512_Hash(CustomerPassword, customer.Account.Username, s);
+                    db.Accounts.Add(customer.Account);
+                    db.SaveChanges();
+                    //ViewBag.Message = "IsValid";
+                }
+                return RedirectToAction("Index");
+            }
+            //ViewBag.Message = "IsNotValid";
+            return View(customer);
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
-
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
             return View();
         }
-
         private static byte[] SaltMe(int maximumSaltLength)
         {
             var salt = new byte[maximumSaltLength];
@@ -94,7 +128,6 @@ namespace AspInANetStoreFrontEnd.Controllers
             }
             return salt;
         }
-
         public static string SHA512_Hash(string password, string username, byte[] salt)
         {
             try
@@ -119,7 +152,6 @@ namespace AspInANetStoreFrontEnd.Controllers
                 return string.Empty;
             }
         }
-
         public static bool ComparePasswordHash(string password, string username, string OldHASHValue, byte[] SALT)
         {
             try

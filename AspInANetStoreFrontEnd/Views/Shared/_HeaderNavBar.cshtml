@@ -1,49 +1,56 @@
-﻿    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Asp In A Net", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">       
+﻿<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Asp In A Net", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
 
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    @if(Session["UserId"] != null)
-                    {
-                        using (Html.BeginForm("Logout", "Home", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-                        {
-                        @Html.AntiForgeryToken()
-                            <li>
-                                @using (AspInANetStoreFrontEnd.Models.AspInANetStoreDatabaseEntities1 db = new AspInANetStoreFrontEnd.Models.AspInANetStoreDatabaseEntities1())
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("About", "About", "Home")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                @if (Session["UserId"] != null)
+                {
+                    <li>
+                        <div class="container">
+                            @using (AspInANetStoreFrontEnd.Models.AspInANetStoreDatabaseEntities1 db = new AspInANetStoreFrontEnd.Models.AspInANetStoreDatabaseEntities1())
+                            {
+                                int? id = Session["UserId"] as int?;
+                                if (id != null)
                                 {
-                                    int? id = Session["UserId"] as int?;
-                                    if (id != null)
+                                    <h5 class="text-muted">Hello @db.Accounts.Where(a => a.Id == id).FirstOrDefault().Username</h5>
+                                    if (db.Staffs.Where(s => s.AccountId == id).FirstOrDefault() != null)
                                     {
-                                        Html.Label("Hello " + db.Accounts.Where(a => a.Id == id).FirstOrDefault().Username);
-                                    }
-                                    else
-                                    {
-                                        ViewBag.Message = "Error #03: Something weird happened";
-                                        Html.Action("Login", "Home");
+                                        @Html.ActionLink("Manage", "Index", "Manage");
                                     }
                                 }
-                            </li>
-                            <li><a class="navbar-right" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-                        }
-                    } else
-                    {
-                        <li>@Html.ActionLink("Register", "Register", "Home", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                                else
+                                {
+                                    ViewBag.Message = "Error #03: Something weird happened";
+                                    @Html.Action("Login", "Home");
+                                }
+                            }
+                            @using (Html.BeginForm("Logout", "Home", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right align-middle", style="position:relative; left:10px" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <a class="navbar-right" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                            }
+                        </div>
+                    </li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("Register", "Register", "Home", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
                         <li>@Html.ActionLink("Sign In", "Login", "Home", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-                    }
-                </ul>
-            </div>
+                }
+            </ul>
         </div>
     </div>
+</div>

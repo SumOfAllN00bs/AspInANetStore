@@ -2,6 +2,7 @@
 (
 	[Id] INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[ProductName] VarChar(50),
+	[ProductImage] VarChar(2048),
 	[BaseCost] float default 0,
 	[Description] VarChar(MAX) NULL,
 	[Type] VarChar(50) NULL, 

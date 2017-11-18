@@ -1,0 +1,63 @@
+﻿@model AspInANetStoreFrontEnd.Models.Customer
+@{
+    ViewBag.Title = "Register";
+}
+<h2>Register</h2>
+<div class="container">
+    @using (Html.BeginForm("Register", "Home", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        if(ViewBag.Message != null)
+        {
+            <div style="border: 1px solid red">
+                @ViewBag.Message
+            </div>
+        }
+        <div  class="form-group row">
+            @Html.LabelFor(m => m.FirstName, null, new { @class = "col-md-2 col-md-offset-3" })
+            @Html.TextBoxFor(m => m.FirstName, null, new {@class="col-md-3 col-md-offset-0"})
+            @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+        </div>
+        <div  class="form-group row">
+            @Html.LabelFor(m => m.LastName, null, new {@class="col-md-2 col-md-offset-3"})
+            @Html.TextBoxFor(m => m.LastName, null, new {@class="col-md-3 col-md-offset-0"})
+            @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+        </div>
+        <div  class="form-group row">
+            @Html.LabelFor(m => m.MiddleName, null, new {@class="col-md-2 col-md-offset-3"})
+            @Html.TextBoxFor(m => m.MiddleName, null, new {@class="col-md-3 col-md-offset-0"})
+            @Html.ValidationMessageFor(m => m.MiddleName, "", new { @class = "text-danger" })
+        </div>
+        <div  class="form-group row">
+            @Html.LabelFor(m => m.Phone, null, new {@class="col-md-2 col-md-offset-3"})
+            @Html.TextBoxFor(m => m.Phone, null, new {@class="col-md-3 col-md-offset-0"})
+            @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+        </div>
+        <div  class="form-group row">
+            @Html.LabelFor(m => m.Email, null, new {@class="col-md-2 col-md-offset-3"})
+            @Html.TextBoxFor(m => m.Email, null, new {@class="col-md-3 col-md-offset-0"})
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+        </div>
+        <div  class="form-group row">
+            @Html.LabelFor(m => m.Address, null, new {@class="col-md-2 col-md-offset-3"})
+            @Html.TextBoxFor(m => m.Address, null, new {@class="col-md-3 col-md-offset-0"})
+            @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+        </div>
+        <div  class="form-group row">
+            @Html.LabelFor(m => m.BitCoinAmount, null, new {@class="col-md-2 col-md-offset-3"})
+            @Html.TextBoxFor(m => m.BitCoinAmount, null, new {@class="col-md-3 col-md-offset-0"})
+            @Html.ValidationMessageFor(m => m.BitCoinAmount, "", new { @class = "text-danger" })
+        </div>
+        <div  class="form-group row">
+            @Html.LabelFor(m => m.Account.Username, null, new {@class="col-md-2 col-md-offset-3"})
+            @Html.TextBoxFor(m => m.Account.Username, null, new {@class="col-md-3 col-md-offset-0"})
+            @Html.ValidationMessageFor(m => m.Account.Username, "", new { @class = "text-danger" })
+        </div>
+        <div  class="form-group row">
+            @Html.Label("Password: ", null, new {@class="col-md-2 col-md-offset-3"})
+            @Html.Password("CustomerPassword", null, new {@class="col-md-3 col-md-offset-0"})
+        </div>
+        <input type="submit" value="Register" class="Register col-md-2 col-md-offset-3" />
+    }
+</div>

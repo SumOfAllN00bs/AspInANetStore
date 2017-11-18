@@ -27,6 +27,7 @@ namespace AspInANetStoreFrontEnd.Models
         public string Description { get; set; }
         public string Type { get; set; }
         public Nullable<int> Stocked { get; set; }
+        public string ProductImage { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CataloguedProduct> CataloguedProducts { get; set; }
