@@ -4,18 +4,44 @@
     ViewBag.Title = "StoreFront";
 }
 <h2>Store</h2>
-@foreach (var item in Model)
-{
-    <div class="row">
-        <div class="col-md-3">
-            <img class="img-responsive img-rounded" src="@item.ProductImage" />
-            <p>@item.ProductName</p>
-        </div>
-        <div class="col-md-3">
-            <p>@item.Description</p>
-        </div>
-        <div class="col-md-3">
-            <p>Pet Cost: @item.BaseCost + Extra for services cost: @item.CataloguedProducts.Where(cp => cp.ProductId == item.Id).FirstOrDefault().Catalogue.ExtraCatalogueCost</p>
-    </div>
-</div>
-}
+
+<table class="table">
+    <tr>
+        <th class="col-md-3">
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BaseCost)
+        </th>
+        <th class="col-md-4">
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stocked)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th class="col-md-3">
+                <img class="img-responsive img-rounded" src="@item.ProductImage" />
+                <p>@item.ProductName</p>
+            </th>
+            <th>
+                <p>Pet Cost: @item.BaseCost + Extra for services cost: @item.CataloguedProducts.Where(cp => cp.ProductId == item.Id).FirstOrDefault().Catalogue.ExtraCatalogueCost</p>
+            </th>
+            <th class="col-md-4">
+                <p>@item.Description</p>
+            </th>
+            <th>
+                <p>@item.Type</p>
+            </th>
+            <th>
+                <p>@item.Stocked</p>
+            </th>
+        </tr>
+    }
+</table>

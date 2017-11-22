@@ -35,4 +35,24 @@ namespace AspInANetStoreFrontEnd.Models
         [Display(Name = "BitCoin Amount")]
         public float BitCoinAmount;
     }
+    public class ProductMetadata
+    {
+        [StringLength(50)]
+        [Display(Name = "Name")]
+        public string ProductName;
+
+        [Display(Name = "Cost")]
+        public Nullable<double> BaseCost;
+
+        [StringLength(50)]
+        [Display(Name = "Type")]
+        public string Type;
+
+        [Display(Name = "Stocked")]
+        public Nullable<int> Stocked;
+
+        [StringLength(2048)]
+        [Display(Name = "ImageUrl")]
+        public string ProductImage;
+    }
 }

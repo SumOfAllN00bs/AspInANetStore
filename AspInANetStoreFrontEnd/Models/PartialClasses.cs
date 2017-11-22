@@ -11,4 +11,10 @@ namespace AspInANetStoreFrontEnd.Models
     {
 
     }
+
+    [MetadataType(typeof(ProductMetadata))]
+    public partial class Product
+    {
+
+    }
 }
