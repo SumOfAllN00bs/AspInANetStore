@@ -308,6 +308,7 @@
     <Content Include="Views\Staffs\Index.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Products\StoreFront.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

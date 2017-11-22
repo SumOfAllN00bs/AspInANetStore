@@ -1,0 +1,21 @@
+﻿@model IEnumerable<AspInANetStoreFrontEnd.Models.Product>
+
+@{
+    ViewBag.Title = "StoreFront";
+}
+<h2>Store</h2>
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col-md-3">
+            <img class="img-responsive img-rounded" src="@item.ProductImage" />
+            <p>@item.ProductName</p>
+        </div>
+        <div class="col-md-3">
+            <p>@item.Description</p>
+        </div>
+        <div class="col-md-3">
+            <p>Pet Cost: @item.BaseCost + Extra for services cost: @item.CataloguedProducts.Where(cp => cp.ProductId == item.Id).FirstOrDefault().Catalogue.ExtraCatalogueCost</p>
+    </div>
+</div>
+}

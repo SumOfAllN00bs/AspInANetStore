@@ -20,6 +20,20 @@ namespace AspInANetStoreFrontEnd.Controllers
             return View(db.Products.ToList());
         }
 
+        // GET: Products/StoreFront/5
+        public ActionResult StoreFrontFiltered(AspInANetStoreFrontEnd.Models.Catalogue c)
+        {
+            var filteredProducts = db.CataloguedProducts.Where(j => j.CatalogueId == c.Id).Join(db.Products, cp => cp.ProductId, p => p.Id, (cp, p) => p);
+            return View("StoreFront", filteredProducts.ToList());
+        }
+
+        // GET: Products/StoreFront/5
+        public ActionResult StoreFront()
+        {
+            var filteredProducts = db.CataloguedProducts.Join(db.Products, cp => cp.ProductId, p => p.Id, (cp, p) => p);
+            return View(filteredProducts.ToList());
+        }
+
         // GET: Products/Details/5
         public ActionResult Details(int? id)
         {

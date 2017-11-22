@@ -1,4 +1,4 @@
-﻿<div class="navbar navbar-inverse navbar-fixed-top">
+﻿<div id="MyHeaderNavBar" class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -37,7 +37,7 @@
                                     @Html.Action("Login", "Home");
                                 }
                             }
-                            @using (Html.BeginForm("Logout", "Home", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right align-middle", style="position:relative; left:10px" }))
+                            @using (Html.BeginForm("Logout", "Home", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right align-middle", style = "position:relative; left:10px" }))
                             {
                                 @Html.AntiForgeryToken()
                                 <a class="navbar-right" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
@@ -48,7 +48,7 @@
                 else
                 {
                     <li>@Html.ActionLink("Register", "Register", "Home", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                        <li>@Html.ActionLink("Sign In", "Login", "Home", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    <li>@Html.ActionLink("Sign In", "Login", "Home", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
                 }
             </ul>
         </div>

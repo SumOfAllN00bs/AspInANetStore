@@ -1,9 +1,7 @@
 ﻿@{
     ViewBag.Title = "Home Page";
-    //Todo: resolve Catagory image href below
     //Todo: seperate colors for each category of pet
     //Todo: Get Everything done in a week
-    //Todo: Don't neglect contact and about pages
 }
 <div class="row">
     <div class="col-md-2 col-sm-1">
@@ -27,7 +25,7 @@
         foreach (AspInANetStoreFrontEnd.Models.Catalogue Catagory in db.Catalogues)
         {
             <div class="col-md-3">
-                <a href='@Url.Action("MyAction", "MyController")'>
+                <a href='@Url.Action("StoreFrontFiltered", "Products", new { Id = Catagory.Id })' onmouseover='Cookies.set("CatagoryColor", "DarkGreen"); SetColorFromCatagoryCookie()'>
 
                     <img class="img-responsive img-rounded" src="@Catagory.CatagoryImage">
                     <div class="caption">
@@ -38,3 +36,17 @@
         }
     }
 </div>
+
+@section scripts{
+    <script>
+        var SetColorFromCatagoryCookie = function () {
+            if (Cookies.get("CatagoryColor")) {
+                $("#MyHeaderNavBar").css("color", "darkgreen");
+            }
+        }
+        $(function () {
+            SetColorFromCatagoryCookie();
+        });
+
+    </script>
+}
