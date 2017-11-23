@@ -31,9 +31,14 @@ namespace AspInANetStoreFrontEnd.Controllers
         public ActionResult StoreFront()
         {
             var filteredProducts = db.CataloguedProducts.Join(db.Products, cp => cp.ProductId, p => p.Id, (cp, p) => p);
+            if (Request.Cookies["CatagoryColor"] != null)
+            {
+                HttpCookie myCookie = new HttpCookie("CatagoryColor");
+                myCookie.Expires = DateTime.Now.AddDays(-1d);
+                Response.Cookies.Add(myCookie);
+            }
             return View(filteredProducts.ToList());
         }
-
         // GET: Products/Details/5
         public ActionResult Details(int? id)
         {
@@ -60,7 +65,7 @@ namespace AspInANetStoreFrontEnd.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ProductName,BaseCost,Description,Type,Stocked")] Product product)
+        public ActionResult Create([Bind(Include = "Id,ProductName,BaseCost,Description,Type,Stocked,ProductImage")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +97,7 @@ namespace AspInANetStoreFrontEnd.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ProductName,BaseCost,Description,Type,Stocked")] Product product)
+        public ActionResult Edit([Bind(Include = "Id,ProductName,BaseCost,Description,Type,Stocked,ProductImage")] Product product)
         {
             if (ModelState.IsValid)
             {

@@ -1,16 +1,16 @@
 ﻿/*Set up the Catalogue / catagory*/
 MERGE INTO Catalogue AS Target
 USING (VALUES 
-		(1, 'Snakes','A dangerous pet to have, potentially venomous. Extra cost for defanging', 100, 'https://s.hswstatic.com/gif/snakes-toilet-pipe-orig.jpg'),
-		(2, 'Crocodiles', 'Easy to look after, just throw them a hunk of meat every other day. No extra cost', 0,'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Nile_crocodile_head.jpg/1200px-Nile_crocodile_head.jpg'),
-		(3, 'Felines', 'From Leopards to Lions, from Cougar''s to Cheetah''s, we have all kinds of cats. Extra cost for neutering', 50,'https://www.wildvoyager.com/wp-content/uploads/2016/11/20150727-DSC_8962-2.jpg'),
-		(4, 'Spiders','We have every major spider species on the planet but we specialize in Tarantulas, No extra cost', 0,'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Orb_weaver_spider_day_web03.jpg/1200px-Orb_weaver_spider_day_web03.jpg')
+		(1, 'Snakes','A dangerous pet to have, potentially venomous. Extra cost for defanging', 100, 'https://s.hswstatic.com/gif/snakes-toilet-pipe-orig.jpg', 'DarkGreen'),
+		(2, 'Crocodiles', 'Easy to look after, just throw them a hunk of meat every other day. No extra cost', 0,'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Nile_crocodile_head.jpg/1200px-Nile_crocodile_head.jpg', 'CadetBlue'),
+		(3, 'Felines', 'From Leopards to Lions, from Cougar''s to Cheetah''s, we have all kinds of cats. Extra cost for neutering', 50,'https://www.wildvoyager.com/wp-content/uploads/2016/11/20150727-DSC_8962-2.jpg', 'GoldenRod'),
+		(4, 'Spiders','We have every major spider species on the planet but we specialize in Tarantulas, No extra cost', 0,'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Orb_weaver_spider_day_web03.jpg/1200px-Orb_weaver_spider_day_web03.jpg', 'MidnightBlue')
 )
-AS Source(Id, Name, Description, ExtraCatalogueCost, CatagoryImage)
+AS Source(Id, Name, Description, ExtraCatalogueCost, CatagoryImage, CatagoryColor)
 ON Target.Id = Source.Id
 WHEN NOT MATCHED BY TARGET THEN
-INSERT (Name, Description, ExtraCatalogueCost, CatagoryImage)
-VALUES (Name, Description, ExtraCatalogueCost, CatagoryImage);
+INSERT (Name, Description, ExtraCatalogueCost, CatagoryImage, CatagoryColor)
+VALUES (Name, Description, ExtraCatalogueCost, CatagoryImage, CatagoryColor);
 
 /*Set up the Account*/
 MERGE INTO Account AS Target

@@ -267,6 +267,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js-cookie\js.cookie-2.2.0.min.js" />
+    <Content Include="Scripts\js-cookie\js.cookie.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
@@ -288,11 +290,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_HeaderNavBar.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Catalogues\Create.cshtml" />
-    <Content Include="Views\Catalogues\Delete.cshtml" />
-    <Content Include="Views\Catalogues\Details.cshtml" />
-    <Content Include="Views\Catalogues\Edit.cshtml" />
-    <Content Include="Views\Catalogues\Index.cshtml" />
     <Content Include="Views\CataloguedProducts\Create.cshtml" />
     <Content Include="Views\CataloguedProducts\Delete.cshtml" />
     <Content Include="Views\CataloguedProducts\Details.cshtml" />
@@ -303,11 +300,6 @@
     <Content Include="Views\Orders\Details.cshtml" />
     <Content Include="Views\Orders\Edit.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
-    <Content Include="Views\Products\Create.cshtml" />
-    <Content Include="Views\Products\Delete.cshtml" />
-    <Content Include="Views\Products\Details.cshtml" />
-    <Content Include="Views\Products\Edit.cshtml" />
-    <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\ProductOrders\Create.cshtml" />
     <Content Include="Views\ProductOrders\Delete.cshtml" />
     <Content Include="Views\ProductOrders\Details.cshtml" />
@@ -326,6 +318,16 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\Products\StoreFront.cshtml" />
+    <Content Include="Views\Catalogues\Create.cshtml" />
+    <Content Include="Views\Catalogues\Delete.cshtml" />
+    <Content Include="Views\Catalogues\Details.cshtml" />
+    <Content Include="Views\Catalogues\Edit.cshtml" />
+    <Content Include="Views\Catalogues\Index.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

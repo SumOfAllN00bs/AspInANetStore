@@ -46,7 +46,7 @@ namespace AspInANetStoreFrontEnd.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,ExtraCatalogueCost")] Catalogue catalogue)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,ExtraCatalogueCost,CatagoryImage,CatagoryColor")] Catalogue catalogue)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace AspInANetStoreFrontEnd.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,ExtraCatalogueCost")] Catalogue catalogue)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description,ExtraCatalogueCost,CatagoryImage,CatagoryColor")] Catalogue catalogue)
         {
             if (ModelState.IsValid)
             {

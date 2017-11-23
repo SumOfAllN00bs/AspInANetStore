@@ -6,6 +6,20 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AspInANetStoreFrontEnd.Models
 {
+    public class CatalogueMetadata
+    {
+        public string Name;
+        public string Description;
+
+        [Display(Name = "Extra Cost")]
+        public Nullable<double> ExtraCatalogueCost;
+
+        [Display(Name = "Image URL")]
+        public string CatagoryImage;
+
+        [Display(Name = "Color")]
+        public string CatagoryColor;
+    }
     public class CustomerMetadata
     {
         [StringLength(50)]

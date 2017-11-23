@@ -11,20 +11,23 @@
 </p>
 <table class="table">
     <tr>
-        <th class="col-md-3">
+        <th width="1%">
             @Html.DisplayNameFor(model => model.ProductName)
         </th>
-        <th>
+        <th width="1%">
             @Html.DisplayNameFor(model => model.BaseCost)
         </th>
-        <th class="col-md-4">
+        <th class="col-md-3">
             @Html.DisplayNameFor(model => model.Description)
         </th>
-        <th>
+        <th width="1%">
             @Html.DisplayNameFor(model => model.Type)
         </th>
-        <th>
+        <th width="1%">
             @Html.DisplayNameFor(model => model.Stocked)
+        </th>
+        <th class="col-md-3">
+            @Html.DisplayNameFor(model => model.ProductImage)
         </th>
         <th></th>
     </tr>
@@ -45,6 +48,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Stocked)
+        </td>
+        <td style="word-break:break-all">
+            @Html.DisplayFor(modelItem => item.ProductImage)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

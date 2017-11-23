@@ -4,5 +4,6 @@
 	[Name] VarChar(50),
 	[Description] VarChar(150),
 	[ExtraCatalogueCost] float null default 0, 
-    [CatagoryImage] VARCHAR(2048) NULL
+    [CatagoryImage] VARCHAR(2048) NULL,
+	[CatagoryColor] VARCHAR(50)
 )
